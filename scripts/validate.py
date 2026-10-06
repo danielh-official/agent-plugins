@@ -27,7 +27,11 @@ def source_key(source):
     kind = source.get("source")
     if kind == "local":
         path = source.get("path")
-        if not isinstance(path, str) or not path.startswith("./") or ".." in Path(path).parts:
+        if (
+            not isinstance(path, str)
+            or not path.startswith("./")
+            or ".." in Path(path).parts
+        ):
             raise ValueError("local source must stay inside the marketplace root")
         return ("local", path)
     if kind == "github":
@@ -37,14 +41,23 @@ def source_key(source):
         url = f"https://github.com/{repo}"
     elif kind == "url":
         url = source.get("url")
-        if not isinstance(url, str) or not re.fullmatch(r"https://github\.com/[\w.-]+/[\w.-]+(?:\.git)?", url):
+        if not isinstance(url, str) or not re.fullmatch(
+            r"https://github\.com/[\w.-]+/[\w.-]+(?:\.git)?", url
+        ):
             raise ValueError("expected an HTTPS GitHub source without credentials")
         url = url.removesuffix(".git")
     elif kind == "git-subdir":
         url, path = source.get("url"), source.get("path")
-        if not isinstance(url, str) or not re.fullmatch(r"https://github\.com/[\w.-]+/[\w.-]+(?:\.git)?", url):
+        if not isinstance(url, str) or not re.fullmatch(
+            r"https://github\.com/[\w.-]+/[\w.-]+(?:\.git)?", url
+        ):
             raise ValueError("expected an HTTPS GitHub source without credentials")
-        if not isinstance(path, str) or not path or path.startswith("/") or ".." in Path(path).parts:
+        if (
+            not isinstance(path, str)
+            or not path
+            or path.startswith("/")
+            or ".." in Path(path).parts
+        ):
             raise ValueError("git-subdir source requires a relative path")
         url = f"{url.removesuffix('.git')}/{path.removeprefix('./')}"
     else:
@@ -61,7 +74,9 @@ def entries(catalog):
         if not isinstance(entry, dict):
             raise ValueError("plugin entries must be objects")
         name = entry.get("name")
-        if not isinstance(name, str) or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", name):
+        if not isinstance(name, str) or not re.fullmatch(
+            r"[a-z0-9]+(?:-[a-z0-9]+)*", name
+        ):
             raise ValueError("plugin names must be lowercase kebab-case")
         if name in result:
             raise ValueError(f"duplicate plugin: {name}")
@@ -76,8 +91,13 @@ def validate(root):
         cplugins, xplugins = entries(claude), entries(codex)
     except (OSError, UnicodeError, ValueError) as exc:
         return [str(exc)]
-    if claude.get("name") != codex.get("name") or claude.get("name") != "danielh-official-plugins":
-        errors.append("Both catalogs must retain marketplace name danielh-official-plugins")
+    if (
+        claude.get("name") != codex.get("name")
+        or claude.get("name") != "danielh-official-plugins"
+    ):
+        errors.append(
+            "Both catalogs must retain marketplace name danielh-official-plugins"
+        )
     if not isinstance(claude.get("owner"), dict) or not claude["owner"].get("name"):
         errors.append("Claude catalog requires owner.name")
     if set(cplugins) != set(xplugins):
@@ -87,13 +107,20 @@ def validate(root):
     for name in sorted(set(cplugins) & set(xplugins)):
         cplugin, xplugin = cplugins[name], xplugins[name]
         try:
-            csource, xsource = source_key(cplugin.get("source")), source_key(xplugin.get("source"))
+            csource, xsource = (
+                source_key(cplugin.get("source")),
+                source_key(xplugin.get("source")),
+            )
             if csource != xsource:
-                errors.append(f"{name}: catalogs point at different sources or revisions")
+                errors.append(
+                    f"{name}: catalogs point at different sources or revisions"
+                )
             if csource[0] == "local":
                 plugin_root = (root / csource[1]).resolve()
                 if not plugin_root.is_relative_to(root.resolve()):
-                    errors.append(f"{name}: local source must stay inside the marketplace root")
+                    errors.append(
+                        f"{name}: local source must stay inside the marketplace root"
+                    )
                 elif csource[1] != f"./plugins/{name}":
                     errors.append(f"{name}: local source must be ./plugins/{name}")
                 else:
@@ -102,25 +129,37 @@ def validate(root):
             errors.append(f"{name}: {exc}")
         for field in ("version", "description"):
             if field in cplugin:
-                errors.append(f"{name}: Claude catalog must not duplicate manifest {field}")
+                errors.append(
+                    f"{name}: Claude catalog must not duplicate manifest {field}"
+                )
         if "description" in xplugin:
-            errors.append(f"{name}: OpenAI catalog must not duplicate manifest description")
-        if str(cplugin.get("category", "")).lower() != str(xplugin.get("category", "")).lower():
+            errors.append(
+                f"{name}: OpenAI catalog must not duplicate manifest description"
+            )
+        if (
+            str(cplugin.get("category", "")).lower()
+            != str(xplugin.get("category", "")).lower()
+        ):
             errors.append(f"{name}: categories disagree")
         policy = xplugin.get("policy")
         if not isinstance(policy, dict):
             errors.append(f"{name}: missing OpenAI policy")
         else:
-            if policy.get("installation") not in ("AVAILABLE", "INSTALLED_BY_DEFAULT", "NOT_AVAILABLE"):
+            if policy.get("installation") not in (
+                "AVAILABLE",
+                "INSTALLED_BY_DEFAULT",
+                "NOT_AVAILABLE",
+            ):
                 errors.append(f"{name}: invalid installation policy")
             if policy.get("authentication") not in ("ON_INSTALL", "ON_USE"):
                 errors.append(f"{name}: invalid authentication policy")
 
     try:
-        bundled = {
-            path.name for path in (root / "plugins").iterdir()
-            if path.is_dir()
-        } if (root / "plugins").is_dir() else set()
+        bundled = (
+            {path.name for path in (root / "plugins").iterdir() if path.is_dir()}
+            if (root / "plugins").is_dir()
+            else set()
+        )
     except OSError as exc:
         errors.append(f"Cannot list bundled plugins: {exc}")
         bundled = set()
@@ -145,8 +184,13 @@ def validate(root):
         for field in ("name", "version", "description"):
             if cmanifest.get(field) != xmanifest.get(field):
                 errors.append(f"{name}: plugin manifests disagree on {field}")
-        if xmanifest.get("$schema") != "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json":
-            errors.append(f"{name}: portable manifest requires the Agent Plugins 1.0.0 schema")
+        if (
+            xmanifest.get("$schema")
+            != "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json"
+        ):
+            errors.append(
+                f"{name}: portable manifest requires the Agent Plugins 1.0.0 schema"
+            )
         if cmanifest.get("name") != name:
             errors.append(f"{name}: catalog and package disagree on name")
 
@@ -158,14 +202,18 @@ def validate(root):
         try:
             result = subprocess.run(
                 [sys.executable, str(validator), str(plugin_root)],
-                capture_output=True, text=True, check=False,
+                capture_output=True,
+                text=True,
+                check=False,
             )
         except (OSError, UnicodeError) as exc:
             errors.append(f"{name}: cannot run package validator: {exc}")
             continue
 
         if result.returncode:
-            errors.append(f"{name}: package validation failed\n{result.stdout}{result.stderr}")
+            errors.append(
+                f"{name}: package validation failed\n{result.stdout}{result.stderr}"
+            )
 
     return errors
 

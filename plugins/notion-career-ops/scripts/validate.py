@@ -45,7 +45,10 @@ def validate(root):
     if claude.get("skills") != "./skills/":
         errors.append("Expected skills path ./skills/")
 
-    if portable.get("$schema") != "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json":
+    if (
+        portable.get("$schema")
+        != "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json"
+    ):
         errors.append("OpenAI manifest: expected Agent Plugins 1.0.0 schema")
 
     if (root / ".claude-plugin/marketplace.json").exists():
@@ -107,7 +110,7 @@ def validate(root):
             errors.append(f"{skill.relative_to(root)}: {exc}")
             continue
 
-        frontmatter = re.match(r"\A---\r?\n(.*?)\r?\n---(?:\r?\n|$)", text, re.S)
+        frontmatter = re.match(r"\A---\r?\n(.*?)\r?\n---(?:\r?\n|$)", text, re.DOTALL)
         if not frontmatter:
             errors.append(f"{skill.relative_to(root)}: missing frontmatter")
             continue
@@ -127,11 +130,11 @@ def validate(root):
                 "Skill description must be nonempty and at most 1024 characters"
             )
 
-        if not re.search(r"^interface:\s*$", metadata, re.M):
+        if not re.search(r"^interface:\s*$", metadata, re.MULTILINE):
             errors.append("openai.yaml: missing interface")
 
         for key in ("display_name", "short_description", "default_prompt"):
-            match = re.search(rf"^  {key}:[ \t]*([^\r\n]*)$", metadata, re.M)
+            match = re.search(rf"^  {key}:[ \t]*([^\r\n]*)$", metadata, re.MULTILINE)
             if not match or not match.group(1).strip().strip("'\"").strip():
                 errors.append(f"openai.yaml: missing or empty {key}")
 

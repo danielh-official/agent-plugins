@@ -1,0 +1,3 @@
+[lint]
+# validators raise ValueError for bad input by design
+ignore = ["TRY004"]

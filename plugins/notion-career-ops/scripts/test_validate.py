@@ -22,7 +22,10 @@ class PackageTests(unittest.TestCase):
 
         self.portable = {
             "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
-            **{field: self.manifest[field] for field in ("name", "version", "description")},
+            **{
+                field: self.manifest[field]
+                for field in ("name", "version", "description")
+            },
             "extensions": {
                 "com.openai": {
                     "interface": {
@@ -68,7 +71,9 @@ class PackageTests(unittest.TestCase):
     def test_prompt_limits(self):
         for prompts in ([], ["x"] * 4, ["x" * 129], [""], [3], [" "]):
             with self.subTest(prompts=prompts):
-                self.portable["extensions"]["com.openai"]["interface"]["defaultPrompt"] = prompts
+                self.portable["extensions"]["com.openai"]["interface"][
+                    "defaultPrompt"
+                ] = prompts
                 self.write("plugin.json", self.portable)
                 self.assertTrue(
                     any("defaultPrompt" in error for error in validate(self.root))
@@ -118,7 +123,9 @@ class PackageTests(unittest.TestCase):
             "---\nname: wrong\ndescription: Example.\n---\n",
             encoding="utf-8",
         )
-        self.assertTrue(any("names must agree" in error for error in validate(self.root)))
+        self.assertTrue(
+            any("names must agree" in error for error in validate(self.root))
+        )
 
         skill_file.unlink()
         self.assertTrue(any("exactly one" in error for error in validate(self.root)))

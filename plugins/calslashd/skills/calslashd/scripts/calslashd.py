@@ -9,6 +9,7 @@ total/burned are raw Health sums since the start date; skipped_* are Health sums
 skipped dates (today included), which this script nets out like the app's realBudget.
 Output: JSON of the stats the app shows. Energy is kcal throughout.
 """
+
 import json
 import math
 import sys
@@ -55,13 +56,19 @@ def compute(i):
     start = _midnight(date.fromisoformat(i["start_date"]), tz)
     # Skipped days: their calories leave the totals (burned only counts with eat-back on).
     total = float(i["total"]) - float(i.get("skipped_dietary", 0))
-    burned = float(i.get("burned", 0)) - float(i.get("skipped_active", 0)) if i.get("eat_back") else 0.0
+    burned = (
+        float(i.get("burned", 0)) - float(i.get("skipped_active", 0))
+        if i.get("eat_back")
+        else 0.0
+    )
     skipped_full = float(i.get("skipped_full_days", 0))
     today_skipped = bool(i.get("today_skipped", False))
     goal_days = float(i.get("goal_days", 1))
 
     day_fraction = min(max(_secs(now, _midnight(now.date(), tz)) / DAY, 0), 1)
-    skipped = skipped_full + (_secs(now, _midnight(now.date(), tz)) / DAY if today_skipped else 0)
+    skipped = skipped_full + (
+        _secs(now, _midnight(now.date(), tz)) / DAY if today_skipped else 0
+    )
     raw_days = _secs(now, start) / DAY - skipped
     net = total - burned
     surplus = max(raw_days, 0) * limit - net
@@ -69,7 +76,11 @@ def compute(i):
 
     def goal_eta(g):
         days = (g + net) / limit + skipped_full + (1 if today_skipped else 0)
-        return (start.astimezone(UTC) + timedelta(seconds=days * DAY)).astimezone(tz).isoformat()
+        return (
+            (start.astimezone(UTC) + timedelta(seconds=days * DAY))
+            .astimezone(tz)
+            .isoformat()
+        )
 
     goals, s = [], surplus
     for _ in range(16):
@@ -89,7 +100,9 @@ def compute(i):
         "goal_met": surplus >= goal_days * limit,
         "next_goal": goals[0],
         "next_goal_eta": goal_eta(goals[0]),
-        **({"goal_eta": goal_eta(float(i["goal"]))} if "goal" in i else {}),  # ETA for any surplus target
+        **(
+            {"goal_eta": goal_eta(float(i["goal"]))} if "goal" in i else {}
+        ),  # ETA for any surplus target
         "upcoming_goals": goals,
         "upcoming_steps": [base + k * STEP for k in range(20)],
         "day_fraction": day_fraction,

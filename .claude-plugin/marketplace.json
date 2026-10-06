@@ -25,6 +25,11 @@
         "path": "plugins/quiz-api"
       },
       "category": "productivity"
+    },
+    {
+      "name": "calslashd",
+      "source": "./plugins/calslashd",
+      "category": "health"
     }
   ]
 }

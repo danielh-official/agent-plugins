@@ -7,6 +7,7 @@ Marketplace name: **danielh-official-plugins**.
 | --- | --- | --- |
 | [notion-career-ops](plugins/notion-career-ops/README.md) | Career Ops job-search tracker in Notion | Claude, Codex, ChatGPT, Gemini CLI (needs Notion connected) |
 | [netnewswire-digest](plugins/netnewswire-digest/README.md) | Ranked, summarized digest of NetNewsWire articles | Claude Code, local Codex, Gemini CLI on macOS (needs a shell) |
+| [calslashd](plugins/calslashd/README.md) | Calorie-budget stats from Apple Health using the CalSlashD app's formulas | Claude, Codex, ChatGPT, Gemini CLI on iOS (needs Apple Health access) |
 | [quiz-api](https://github.com/danielh-official/quiz-api/tree/main/plugins/quiz-api) | Study and write spaced-repetition quizzes via the Quiz API MCP server | Claude Code, Codex, Gemini CLI (needs a Quiz API account) |
 
 ## Install
@@ -18,6 +19,7 @@ claude plugin marketplace add danielh-official/agent-plugins
 claude plugin install notion-career-ops@danielh-official-plugins
 claude plugin install netnewswire-digest@danielh-official-plugins
 claude plugin install quiz-api@danielh-official-plugins
+claude plugin install calslashd@danielh-official-plugins
 ```
 
 Or inside a session: `/plugin marketplace add danielh-official/agent-plugins`,
@@ -35,6 +37,7 @@ codex plugin marketplace add danielh-official/agent-plugins
 codex plugin add notion-career-ops@danielh-official-plugins
 codex plugin add netnewswire-digest@danielh-official-plugins
 codex plugin add quiz-api@danielh-official-plugins
+codex plugin add calslashd@danielh-official-plugins
 ```
 
 ### Gemini CLI
@@ -46,6 +49,7 @@ path, so clone and install each plugin directory:
 git clone https://github.com/danielh-official/agent-plugins.git
 gemini extensions install ./agent-plugins/plugins/notion-career-ops
 gemini extensions install ./agent-plugins/plugins/netnewswire-digest
+gemini extensions install ./agent-plugins/plugins/calslashd
 ```
 
 `quiz-api` lives in its own repo; clone it and install `plugins/quiz-api` by
@@ -85,6 +89,8 @@ python3 scripts/validate.py
 python3 -m unittest discover -s tests -v
 python3 -m unittest discover -s plugins/notion-career-ops/scripts -p 'test_*.py' -v
 python3 -m unittest discover -s plugins/netnewswire-digest/scripts -p 'test_*.py' -v
+python3 -m unittest discover -s plugins/calslashd/scripts -p 'test_*.py' -v
+python3 plugins/calslashd/skills/calslashd/scripts/selfcheck.py
 claude plugin validate .
 ```
 

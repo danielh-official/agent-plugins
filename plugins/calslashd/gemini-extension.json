@@ -1,0 +1,5 @@
+{
+  "name": "calslashd",
+  "version": "0.1.0",
+  "description": "Calorie-budget insights from Apple Health using CalSlashD's exact formulas. Needs Apple Health access (Claude or ChatGPT on iOS)."
+}

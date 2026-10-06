@@ -1,0 +1,20 @@
+{
+  "name": "calslashd",
+  "displayName": "CalSlashD",
+  "version": "0.1.0",
+  "description": "Calorie-budget insights from Apple Health using CalSlashD's exact formulas. Needs Apple Health access (Claude or ChatGPT on iOS).",
+  "author": {
+    "name": "Daniel (Haven) Hotyanov",
+    "url": "https://github.com/danielh-official"
+  },
+  "homepage": "https://calslashd.app",
+  "repository": "https://github.com/danielh-official/agent-plugins",
+  "license": "MIT",
+  "skills": "./skills/",
+  "keywords": [
+    "calories",
+    "apple-health",
+    "nutrition",
+    "budget"
+  ]
+}

@@ -8,7 +8,7 @@ Marketplace name: **danielh-official-plugins**.
 | [notion-career-ops](plugins/notion-career-ops/README.md) | Career Ops job-search tracker in Notion | Claude, Codex, ChatGPT, Antigravity CLI (needs Notion connected) |
 | [netnewswire-digest](plugins/netnewswire-digest/README.md) | Ranked, summarized digest of NetNewsWire articles | Claude Code, local Codex, Antigravity CLI on macOS (needs a shell) |
 | [calslashd](plugins/calslashd/README.md) | Calorie-budget stats from Apple Health using the CalSlashD app's formulas | Claude, Codex, ChatGPT, Antigravity CLI on iOS (needs Apple Health access) |
-| [quiz-api](https://github.com/danielh-official/quiz-api/tree/main/plugins/quiz-api) | Study and write spaced-repetition quizzes via the Quiz API MCP server | Claude Code, Codex, Antigravity CLI (needs a Quiz API account) |
+| [quiz-api](https://github.com/danielh-official/quiz-api/tree/main/plugins/quiz-api) | Study and write spaced-repetition quizzes via the Quiz API MCP server | Claude Code, Codex, Antigravity CLI (needs your own fork of quiz-api, deployed, with `QUIZ_API_URL` set) |
 
 ## Install
 

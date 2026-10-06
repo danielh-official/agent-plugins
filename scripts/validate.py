@@ -46,7 +46,7 @@ def source_key(source):
             raise ValueError("expected an HTTPS GitHub source without credentials")
         if not isinstance(path, str) or not path or path.startswith("/") or ".." in Path(path).parts:
             raise ValueError("git-subdir source requires a relative path")
-        url = f"{url.removesuffix('.git')}/{path}"
+        url = f"{url.removesuffix('.git')}/{path.removeprefix('./')}"
     else:
         raise ValueError(f"unsupported source type: {kind}")
     return ("git", url, source.get("ref"), source.get("sha"))
@@ -80,15 +80,7 @@ def validate(root):
         errors.append("Both catalogs must retain marketplace name danielh-official-plugins")
     if not isinstance(claude.get("owner"), dict) or not claude["owner"].get("name"):
         errors.append("Claude catalog requires owner.name")
-    # ponytail: external plugins (non-local source) are Claude-catalog only; Codex has no manifest for them
-    external = set()
-    for name, entry in cplugins.items():
-        try:
-            if source_key(entry.get("source"))[0] != "local":
-                external.add(name)
-        except ValueError:
-            pass  # reported per-plugin below
-    if set(cplugins) - external != set(xplugins):
+    if set(cplugins) != set(xplugins):
         errors.append("Catalogs list different plugins")
 
     local_roots = {}
@@ -106,8 +98,6 @@ def validate(root):
                     errors.append(f"{name}: local source must be ./plugins/{name}")
                 else:
                     local_roots[name] = plugin_root
-            else:
-                errors.append(f"{name}: master marketplace requires a local plugin source")
         except (OSError, ValueError) as exc:
             errors.append(f"{name}: {exc}")
         for field in ("version", "description"):
@@ -135,7 +125,7 @@ def validate(root):
         errors.append(f"Cannot list bundled plugins: {exc}")
         bundled = set()
 
-    if bundled != set(cplugins) - external:
+    if bundled != set(local_roots):
         errors.append("Bundled plugin directories must match the catalog entries")
 
     for name, plugin_root in local_roots.items():

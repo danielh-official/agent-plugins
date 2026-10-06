@@ -27,6 +27,19 @@
         "authentication": "ON_USE"
       },
       "category": "Productivity"
+    },
+    {
+      "name": "quiz-api",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/danielh-official/quiz-api.git",
+        "path": "./plugins/quiz-api"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
     }
   ]
 }

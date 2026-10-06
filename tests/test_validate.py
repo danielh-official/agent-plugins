@@ -37,11 +37,15 @@ class CatalogTests(unittest.TestCase):
     def test_catalogs_valid(self):
         self.assertEqual(validator.validate(self.root), [])
 
-    def test_external_plugin_claude_only(self):
-        self.claude["plugins"].append({
-            "name": "external",
-            "source": {"source": "git-subdir", "url": "https://github.com/example/repo.git", "path": "plugins/external"},
-            "category": "productivity",
+    def test_external_plugin_both_catalogs(self):
+        source = {"source": "git-subdir", "url": "https://github.com/example/repo.git", "path": "plugins/external"}
+        self.claude["plugins"].append({"name": "external", "source": source, "category": "productivity"})
+        self.save()
+        self.assertTrue(any("different plugins" in error for error in validator.validate(self.root)))
+        self.codex["plugins"].append({
+            "name": "external", "source": {**source, "path": "./plugins/external"},
+            "policy": {"installation": "AVAILABLE", "authentication": "ON_USE"},
+            "category": "Productivity",
         })
         self.save()
         self.assertEqual(validator.validate(self.root), [])

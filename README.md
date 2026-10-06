@@ -7,7 +7,7 @@ Marketplace name: **danielh-official-plugins**.
 | --- | --- | --- |
 | [notion-career-ops](plugins/notion-career-ops/README.md) | Career Ops job-search tracker in Notion | Claude, Codex, ChatGPT (needs Notion connected) |
 | [netnewswire-digest](plugins/netnewswire-digest/README.md) | Ranked, summarized digest of NetNewsWire articles | Claude Code, local Codex on macOS (needs a shell) |
-| [quiz-api](https://github.com/danielh-official/quiz-api/tree/main/plugins/quiz-api) | Study and write spaced-repetition quizzes via the Quiz API MCP server | Claude Code (needs a Quiz API account) |
+| [quiz-api](https://github.com/danielh-official/quiz-api/tree/main/plugins/quiz-api) | Study and write spaced-repetition quizzes via the Quiz API MCP server | Claude Code, Codex, Gemini CLI (needs a Quiz API account) |
 
 ## Install
 
@@ -34,6 +34,7 @@ then `/plugin install <name>@danielh-official-plugins`.
 codex plugin marketplace add danielh-official/agent-plugins
 codex plugin add notion-career-ops@danielh-official-plugins
 codex plugin add netnewswire-digest@danielh-official-plugins
+codex plugin add quiz-api@danielh-official-plugins
 ```
 
 ### ChatGPT

@@ -1,0 +1,5 @@
+{
+  "name": "netnewswire-digest",
+  "version": "0.0.1",
+  "description": "Pull articles from NetNewsWire by filter (unread, starred, folder, feed, recency), then rank them by relevance to you and summarize."
+}

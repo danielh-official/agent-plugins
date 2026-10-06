@@ -1,0 +1,15 @@
+{
+  "name": "netnewswire-digest",
+  "displayName": "NetNewsWire Digest",
+  "version": "0.0.1",
+  "description": "Pull articles from NetNewsWire by filter (unread, starred, folder, feed, recency), then rank them by relevance to you and summarize.",
+  "author": {
+    "name": "Daniel Haven",
+    "url": "https://github.com/danielh-official"
+  },
+  "homepage": "https://github.com/danielh-official/agent-plugins/tree/main/plugins/netnewswire-digest",
+  "repository": "https://github.com/danielh-official/agent-plugins",
+  "license": "MIT",
+  "skills": "./skills/",
+  "keywords": ["netnewswire", "rss", "macos", "applescript", "digest", "summarize"]
+}

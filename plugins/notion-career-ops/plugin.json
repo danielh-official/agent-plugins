@@ -1,0 +1,26 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "notion-career-ops",
+  "version": "0.0.1",
+  "description": "Job-search tracker workflow for the Career Ops page in Notion (Jobs, Events, Contacts, Profile).",
+  "author": {
+    "name": "Daniel Haven",
+    "url": "https://github.com/danielh-official"
+  },
+  "homepage": "https://github.com/danielh-official/agent-plugins/tree/main/plugins/notion-career-ops",
+  "repository": "https://github.com/danielh-official/agent-plugins",
+  "license": "MIT",
+  "keywords": ["notion", "career", "jobs", "applications", "interviews", "recruiting"],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Notion Career Ops",
+        "shortDescription": "Read and update your Notion job-search tracker.",
+        "category": "Productivity",
+        "defaultPrompt": [
+          "Show my active jobs in Notion, grouped by derived status."
+        ]
+      }
+    }
+  }
+}

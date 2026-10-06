@@ -1,0 +1,30 @@
+{
+  "name": "danielh-official-plugins",
+  "owner": {
+    "name": "Daniel Haven"
+  },
+  "metadata": {
+    "description": "Daniel Haven's agent plugins for Claude and local Codex."
+  },
+  "plugins": [
+    {
+      "name": "notion-career-ops",
+      "source": "./plugins/notion-career-ops",
+      "category": "productivity"
+    },
+    {
+      "name": "netnewswire-digest",
+      "source": "./plugins/netnewswire-digest",
+      "category": "productivity"
+    },
+    {
+      "name": "quiz-api",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/danielh-official/quiz-api.git",
+        "path": "plugins/quiz-api"
+      },
+      "category": "productivity"
+    }
+  ]
+}

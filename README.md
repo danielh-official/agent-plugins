@@ -1,14 +1,14 @@
 # agent-plugins
 
-Daniel Haven's plugin marketplace for Claude, OpenAI Codex/ChatGPT, and Gemini CLI.
+Daniel Haven's plugin marketplace for Claude, OpenAI Codex/ChatGPT, and Google Antigravity CLI (`agy`).
 Marketplace name: **danielh-official-plugins**.
 
 | Plugin | What it does | Runs on |
 | --- | --- | --- |
-| [notion-career-ops](plugins/notion-career-ops/README.md) | Career Ops job-search tracker in Notion | Claude, Codex, ChatGPT, Gemini CLI (needs Notion connected) |
-| [netnewswire-digest](plugins/netnewswire-digest/README.md) | Ranked, summarized digest of NetNewsWire articles | Claude Code, local Codex, Gemini CLI on macOS (needs a shell) |
-| [calslashd](plugins/calslashd/README.md) | Calorie-budget stats from Apple Health using the CalSlashD app's formulas | Claude, Codex, ChatGPT, Gemini CLI on iOS (needs Apple Health access) |
-| [quiz-api](https://github.com/danielh-official/quiz-api/tree/main/plugins/quiz-api) | Study and write spaced-repetition quizzes via the Quiz API MCP server | Claude Code, Codex, Gemini CLI (needs a Quiz API account) |
+| [notion-career-ops](plugins/notion-career-ops/README.md) | Career Ops job-search tracker in Notion | Claude, Codex, ChatGPT, Antigravity CLI (needs Notion connected) |
+| [netnewswire-digest](plugins/netnewswire-digest/README.md) | Ranked, summarized digest of NetNewsWire articles | Claude Code, local Codex, Antigravity CLI on macOS (needs a shell) |
+| [calslashd](plugins/calslashd/README.md) | Calorie-budget stats from Apple Health using the CalSlashD app's formulas | Claude, Codex, ChatGPT, Antigravity CLI on iOS (needs Apple Health access) |
+| [quiz-api](https://github.com/danielh-official/quiz-api/tree/main/plugins/quiz-api) | Study and write spaced-repetition quizzes via the Quiz API MCP server | Claude Code, Codex, Antigravity CLI (needs a Quiz API account) |
 
 ## Install
 
@@ -40,20 +40,20 @@ codex plugin add quiz-api@danielh-official-plugins
 codex plugin add calslashd@danielh-official-plugins
 ```
 
-### Gemini CLI
+### Antigravity CLI (`agy`)
 
-Gemini has no marketplace and installs an extension from a repo root or local
-path, so clone and install each plugin directory:
+`agy` has a marketplace, but its docs don't cover third-party ones and it can't
+add this one yet. Clone and install each plugin directory by path:
 
 ```sh
 git clone https://github.com/danielh-official/agent-plugins.git
-gemini extensions install ./agent-plugins/plugins/notion-career-ops
-gemini extensions install ./agent-plugins/plugins/netnewswire-digest
-gemini extensions install ./agent-plugins/plugins/calslashd
+agy plugin install ./agent-plugins/plugins/notion-career-ops
+agy plugin install ./agent-plugins/plugins/netnewswire-digest
+agy plugin install ./agent-plugins/plugins/calslashd
 ```
 
 `quiz-api` lives in its own repo; clone it and install `plugins/quiz-api` by
-path the same way.
+path the same way. Check a package with `agy plugin validate <path>`.
 
 ### ChatGPT
 
@@ -104,8 +104,7 @@ test module names collide.
 .agents/plugins/marketplace.json    Codex/OpenAI catalog
 plugins/<name>/
   .claude-plugin/plugin.json
-  plugin.json                       Codex/OpenAI manifest
-  gemini-extension.json             Gemini manifest
+  plugin.json                       Codex/OpenAI + Antigravity manifest
   skills/<name>/
   scripts/
   README.md
@@ -114,13 +113,13 @@ tests/
 ```
 
 Both catalogs point at `./plugins/<name>`, or at a remote `git-subdir` source
-(`quiz-api`). One canonical skill per plugin serves all three clients. No bundled MCP servers.
+(`quiz-api`). One canonical skill per plugin serves all four clients. No bundled MCP servers.
 
 ## Release / add a plugin
 
-- Keep the version in all three manifests (`.claude-plugin/plugin.json`,
-  `plugin.json`, `gemini-extension.json`) in sync.
-- New plugin: add the full package under `plugins/<name>/` (all three manifests,
+- Keep the version in both manifests (`.claude-plugin/plugin.json`,
+  `plugin.json`) in sync.
+- New plugin: add the full package under `plugins/<name>/` (both manifests,
   skill, OpenAI metadata, validator, tests), list it in both catalogs, add its
   suite to the workflow, then validate.
 - Skill wording changes need explicit approval.

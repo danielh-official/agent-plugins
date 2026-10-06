@@ -23,7 +23,7 @@ See the [master README](../../README.md) for installation and full validation.
 - **The host agent must have the Notion MCP server (or an equivalent Notion
   app connection) installed and authenticated.** This plugin cannot work
   without it: it ships only a skill, no Notion tools. This applies to every
-  client (Claude Code, Codex, Gemini CLI), so connect Notion in each one
+  client (Claude Code, Codex, Antigravity CLI), so connect Notion in each one
   separately.
 - Access to a **Career Ops** page containing **Profile**, **Jobs**, **Events**,
   **Contacts**, and **Notes**

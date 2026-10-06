@@ -31,6 +31,16 @@ assert abs((b - a).total_seconds() - 2 * 86_400) < 1e-3
 n = "2026-01-11T12:00:00+00:00"
 d = run(total=12_000, now=n)["elapsed_days"] - run(total=12_000, now=n, today_skipped=True)["elapsed_days"]
 assert abs(d - 0.5) < 1e-3
+# skipped calories leave the totals (realBudget): 2 skipped days holding 3000 eaten, 800 active
+r = run(total=12_000, skipped_full_days=2, skipped_dietary=3_000)
+assert r["net_calories"] == 9_000 and abs(r["surplus"] - (8 * 2000 - 9_000)) < 1e-3
+# eat-back on: burned is netted too; off: burned ignored entirely
+r = run(total=12_000, burned=1_500, eat_back=True, skipped_dietary=3_000, skipped_active=800)
+assert r["net_calories"] == 9_000 - 700
+assert run(total=12_000, burned=1_500, skipped_active=800)["net_calories"] == 12_000
+# skipped today carries its calories out too
+r = run(total=12_000, today_skipped=True, skipped_dietary=500)
+assert r["net_calories"] == 11_500
 # ladder
 assert saved(700)["next_goal"] == 750
 assert saved(2500)["next_goal"] == 4000

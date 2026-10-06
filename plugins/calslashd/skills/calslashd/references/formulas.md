@@ -6,7 +6,7 @@ Ported from `DailyCalories/Misc/CalorieBudget.swift` and `Misc/DailyStatHelpers.
 - Energy in kcal. 250 kcal is the goal step (hard-coded in the app). Limit range in the app: 500–10000.
 - Start day = local midnight (DST-safe). Elapsed time = absolute seconds / 86400, so a DST day counts 23 or 25 hours. Python: subtract via UTC, add via UTC (same-tz aware datetime math is wall-clock).
 - Health reads: all sources, lower bound start-of-day, upper bound **end of today** (so evening-stamped meals count today).
-- Skipped days: their calories are already excluded from `total`; only the clock changes.
+- Skipped days: in the app they are an explicit per-date override that Health never sees. Here the user names the dates. A skipped day removes its time from the clock (`skipped_full_days`, `today_skipped`) and its calories from the totals (`skipped_dietary`, always; `skipped_active`, only with eat-back), as the app's `realBudget` does. The skill sums Health over those dates itself.
 
 ## Known doc drift
 `CLAUDE.md` says goals are `[0, 250 … 2000]`; code is unbounded (250-steps below one day, then whole-day rungs).

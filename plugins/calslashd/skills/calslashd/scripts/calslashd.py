@@ -2,8 +2,11 @@
 """CalSlashD budget math: a port of DailyCalories/Misc/CalorieBudget.swift.
 
 Usage: python3 calslashd.py '<json>'   (or JSON on stdin)
-Input keys: tz, start_date (YYYY-MM-DD), limit, total, burned, skipped_full_days, goal (optional kcal target),
-            today_skipped, goal_days, now (ISO-8601 with offset; default: current time).
+Input keys: tz, start_date (YYYY-MM-DD), limit, total, burned, eat_back, skipped_dietary,
+            skipped_active, skipped_full_days, today_skipped, goal_days, goal (optional kcal target),
+            now (ISO-8601 with offset; default: current time).
+total/burned are raw Health sums since the start date; skipped_* are Health sums over the
+skipped dates (today included), which this script nets out like the app's realBudget.
 Output: JSON of the stats the app shows. Energy is kcal throughout.
 """
 import json
@@ -50,7 +53,9 @@ def compute(i):
     now = datetime.fromisoformat(i["now"]) if i.get("now") else datetime.now(UTC)
     now = now.astimezone(tz)
     start = _midnight(date.fromisoformat(i["start_date"]), tz)
-    total, burned = float(i["total"]), float(i.get("burned", 0))
+    # Skipped days: their calories leave the totals (burned only counts with eat-back on).
+    total = float(i["total"]) - float(i.get("skipped_dietary", 0))
+    burned = float(i.get("burned", 0)) - float(i.get("skipped_active", 0)) if i.get("eat_back") else 0.0
     skipped_full = float(i.get("skipped_full_days", 0))
     today_skipped = bool(i.get("today_skipped", False))
     goal_days = float(i.get("goal_days", 1))

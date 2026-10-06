@@ -1,7 +1,7 @@
 {
   "name": "calslashd",
   "displayName": "CalSlashD",
-  "version": "0.1.1",
+  "version": "0.0.1",
   "description": "Calorie-budget insights from Apple Health using CalSlashD's exact formulas. Needs Apple Health access (Claude or ChatGPT on iOS).",
   "author": {
     "name": "Daniel (Haven) Hotyanov",

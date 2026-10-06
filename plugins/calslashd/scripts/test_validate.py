@@ -122,7 +122,18 @@ class PackageTests(unittest.TestCase):
             any("names must agree" in error for error in validate(self.root))
         )
         skill_file.unlink()
-        self.assertTrue(any("exactly one" in error for error in validate(self.root)))
+        self.assertTrue(
+            any("skills/<plugin name>" in error for error in validate(self.root))
+        )
+
+    def test_extra_skill_allowed(self):
+        extra = self.root / "skills/extra/agents"
+        extra.mkdir(parents=True)
+        (extra.parent / "SKILL.md").write_text(
+            "---\nname: extra\ndescription: Another skill.\n---\n", encoding="utf-8"
+        )
+        (extra / "openai.yaml").write_text(self.metadata.read_text(encoding="utf-8"))
+        self.assertEqual(validate(self.root), [])
 
 
 if __name__ == "__main__":

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Calorie Streak Calendars"
+  short_description: "Calendar of days under your calorie limit."
+  default_prompt: "Use $calorie-streak-calendars to show my calorie streak calendar."

@@ -84,8 +84,8 @@ def validate(root):
                 "Codex defaultPrompt entries must be nonempty strings of at most 128 characters"
             )
     skills = sorted((root / "skills").glob("*/SKILL.md"))
-    if len(skills) != 1:
-        errors.append("Expected exactly one skills/*/SKILL.md")
+    if not any(skill.parent.name == name for skill in skills):
+        errors.append("Expected a skills/<plugin name>/SKILL.md")
     for skill in skills:
         try:
             text = skill.read_text(encoding="utf-8")
@@ -102,8 +102,8 @@ def validate(root):
             if ":" in line:
                 key, value = line.split(":", 1)
                 fields[key.strip()] = value.strip().strip("'\"")
-        if fields.get("name") != skill.parent.name or skill.parent.name != name:
-            errors.append("Skill frontmatter, folder, and plugin names must agree")
+        if fields.get("name") != skill.parent.name:
+            errors.append("Skill frontmatter and folder names must agree")
         description = fields.get("description", "")
         if not description or len(description) > 1024:
             errors.append(

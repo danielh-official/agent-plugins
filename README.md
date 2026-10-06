@@ -1,12 +1,12 @@
 # agent-plugins
 
-Daniel Haven's plugin marketplace for Claude and OpenAI Codex/ChatGPT.
+Daniel Haven's plugin marketplace for Claude, OpenAI Codex/ChatGPT, and Gemini CLI.
 Marketplace name: **danielh-official-plugins**.
 
 | Plugin | What it does | Runs on |
 | --- | --- | --- |
-| [notion-career-ops](plugins/notion-career-ops/README.md) | Career Ops job-search tracker in Notion | Claude, Codex, ChatGPT (needs Notion connected) |
-| [netnewswire-digest](plugins/netnewswire-digest/README.md) | Ranked, summarized digest of NetNewsWire articles | Claude Code, local Codex on macOS (needs a shell) |
+| [notion-career-ops](plugins/notion-career-ops/README.md) | Career Ops job-search tracker in Notion | Claude, Codex, ChatGPT, Gemini CLI (needs Notion connected) |
+| [netnewswire-digest](plugins/netnewswire-digest/README.md) | Ranked, summarized digest of NetNewsWire articles | Claude Code, local Codex, Gemini CLI on macOS (needs a shell) |
 | [quiz-api](https://github.com/danielh-official/quiz-api/tree/main/plugins/quiz-api) | Study and write spaced-repetition quizzes via the Quiz API MCP server | Claude Code, Codex, Gemini CLI (needs a Quiz API account) |
 
 ## Install
@@ -36,6 +36,20 @@ codex plugin add notion-career-ops@danielh-official-plugins
 codex plugin add netnewswire-digest@danielh-official-plugins
 codex plugin add quiz-api@danielh-official-plugins
 ```
+
+### Gemini CLI
+
+Gemini has no marketplace and installs an extension from a repo root or local
+path, so clone and install each plugin directory:
+
+```sh
+git clone https://github.com/danielh-official/agent-plugins.git
+gemini extensions install ./agent-plugins/plugins/notion-career-ops
+gemini extensions install ./agent-plugins/plugins/netnewswire-digest
+```
+
+`quiz-api` lives in its own repo; clone it and install `plugins/quiz-api` by
+path the same way.
 
 ### ChatGPT
 
@@ -84,7 +98,8 @@ test module names collide.
 .agents/plugins/marketplace.json    Codex/OpenAI catalog
 plugins/<name>/
   .claude-plugin/plugin.json
-  plugin.json
+  plugin.json                       Codex/OpenAI manifest
+  gemini-extension.json             Gemini manifest
   skills/<name>/
   scripts/
   README.md
@@ -92,13 +107,14 @@ scripts/validate.py
 tests/
 ```
 
-Both catalogs point at `./plugins/<name>`. One canonical skill per plugin serves
-both clients. No bundled MCP servers.
+Both catalogs point at `./plugins/<name>`, or at a remote `git-subdir` source
+(`quiz-api`). One canonical skill per plugin serves all three clients. No bundled MCP servers.
 
 ## Release / add a plugin
 
-- Keep the version in both plugin manifests in sync.
-- New plugin: add the full package under `plugins/<name>/` (both manifests,
+- Keep the version in all three manifests (`.claude-plugin/plugin.json`,
+  `plugin.json`, `gemini-extension.json`) in sync.
+- New plugin: add the full package under `plugins/<name>/` (all three manifests,
   skill, OpenAI metadata, validator, tests), list it in both catalogs, add its
   suite to the workflow, then validate.
 - Skill wording changes need explicit approval.

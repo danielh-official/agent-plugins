@@ -24,5 +24,6 @@ jobs:
       - run: python3 -m unittest discover -s plugins/notion-career-ops/scripts -p 'test_*.py' -v
       - run: python3 -m unittest discover -s plugins/netnewswire-digest/scripts -p 'test_*.py' -v
       - run: python3 -m unittest discover -s plugins/calslashd/scripts -p 'test_*.py' -v
+      - run: python3 -m unittest discover -s plugins/linear-topic-grouper/scripts -p 'test_*.py' -v
       - run: python3 plugins/calslashd/skills/calslashd/scripts/selfcheck.py
       - run: python3 plugins/calslashd/skills/calorie-streak-calendars/scripts/selfcheck.py

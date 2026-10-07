@@ -30,6 +30,11 @@
       "name": "calslashd",
       "source": "./plugins/calslashd",
       "category": "health"
+    },
+    {
+      "name": "linear-topic-grouper",
+      "source": "./plugins/linear-topic-grouper",
+      "category": "productivity"
     }
   ]
 }

@@ -103,6 +103,10 @@ claude plugin validate .
 CI runs the same on every push and pull request. Run suites separately; package
 test module names collide.
 
+`scripts/validate.py` checks the catalogs and the packaging rules every plugin
+shares. A plugin's own `scripts/validate.py` is optional and holds only the
+rules specific to that plugin; the root runs it when present.
+
 ## Layout
 
 ```text
@@ -126,6 +130,7 @@ Both catalogs point at `./plugins/<name>`, or at a remote `git-subdir` source
 - Keep the version in both manifests (`.claude-plugin/plugin.json`,
   `plugin.json`) in sync.
 - New plugin: add the full package under `plugins/<name>/` (both manifests,
-  skill, OpenAI metadata, validator, tests), list it in both catalogs, add its
-  suite to the workflow, then validate.
+  skill, OpenAI metadata), list it in both catalogs, then validate. Add a
+  `scripts/validate.py` and tests only for plugin-specific rules, and add that
+  suite to the workflow.
 - Skill wording changes need explicit approval.

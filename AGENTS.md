@@ -6,6 +6,8 @@ Plugin marketplace `danielh-official-plugins` serving Claude, Codex/ChatGPT, and
 
 Run every step of `.github/workflows/validate.yml` before calling work done. Run each `unittest discover` suite as its own command: per-plugin test modules share names (`test_validate.py`) and collide in one run. Python is stdlib-only; ruff lints Python, biome lints `**/*.js`.
 
+Checks every plugin shares go in the root `scripts/validate.py` (`validate_package`, tested in `tests/test_package.py`). Checks specific to one plugin go in that plugin's optional `scripts/validate.py`, which the root runs when present.
+
 ## Editing skills
 
 - Skill wording changes need the user's explicit approval.

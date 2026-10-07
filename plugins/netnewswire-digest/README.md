@@ -66,8 +66,9 @@ claude plugin validate .claude-plugin/plugin.json
 
 GitHub Actions runs the Python packaging checks and regression tests on every push and pull request.
 The workflow lives at the master root and also checks both catalogs and packages.
-The lightweight validator checks our metadata conventions, not the entire YAML
-schema. Refresh the marketplace and installed plugin explicitly as needed;
+This package's `scripts/validate.py` checks only its own rule (exactly one
+skill); the root validator checks the shared metadata conventions, not the
+entire YAML schema. Refresh the marketplace and installed plugin explicitly as needed;
 catalog sync does not necessarily update an installed cached package.
 
 ## Filters

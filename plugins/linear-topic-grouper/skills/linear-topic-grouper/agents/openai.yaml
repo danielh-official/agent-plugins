@@ -1,0 +1,4 @@
+interface:
+  display_name: "Linear Topic Grouper"
+  short_description: "Group Linear issues by topic and flag duplicates."
+  default_prompt: "Use $linear-topic-grouper to group my open Linear issues by topic and flag any duplicates."

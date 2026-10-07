@@ -52,6 +52,18 @@
         "authentication": "ON_USE"
       },
       "category": "Health"
+    },
+    {
+      "name": "linear-topic-grouper",
+      "source": {
+        "source": "local",
+        "path": "./plugins/linear-topic-grouper"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
     }
   ]
 }

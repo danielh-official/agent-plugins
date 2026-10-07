@@ -35,10 +35,10 @@ not bundle a Notion connection or store workspace identifiers.
 
 1. Edit the canonical skill only with explicit approval of wording changes.
 2. Bump `version` in both plugin manifests.
-3. Run `python3 scripts/validate.py`, `python3 -m unittest discover -s scripts -p 'test_*.py' -v`,
-   and `claude plugin validate .`.
-4. From the master root, run `python3 scripts/validate.py` and all three
-   regression suites. No snapshot rebuild is required.
+3. Run `python3 scripts/validate.py` (this plugin's own rule: exactly one skill),
+   `python3 -m unittest discover -s scripts -p 'test_*.py' -v`, and `claude plugin validate .`.
+4. From the master root, run every step of `.github/workflows/validate.yml`;
+   the root `scripts/validate.py` checks the shared packaging rules.
 
 GitHub Actions runs the Python validator and regression tests on every push and pull request.
 The lightweight validator checks our packaging conventions; it is not a full

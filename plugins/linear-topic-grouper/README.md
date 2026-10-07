@@ -32,9 +32,10 @@ See the [master README](../../README.md) for installation and full validation.
 
 1. Edit the canonical skill only with explicit approval of wording changes.
 2. Bump `version` in both plugin manifests.
-3. Run `python3 scripts/validate.py`, `python3 -m unittest discover -s scripts -p 'test_*.py' -v`,
-   and `claude plugin validate .`.
-4. From the master root, run every step of `.github/workflows/validate.yml`.
+3. Run `python3 scripts/validate.py` (this plugin's own rule: exactly one skill),
+   `python3 -m unittest discover -s scripts -p 'test_*.py' -v`, and `claude plugin validate .`.
+4. From the master root, run every step of `.github/workflows/validate.yml`;
+   the root `scripts/validate.py` checks the shared packaging rules.
 
 ## Local use
 

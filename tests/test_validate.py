@@ -149,11 +149,20 @@ class CatalogTests(unittest.TestCase):
                 )
                 del catalog["plugins"][0][field]
 
-    def test_missing_package_validator(self):
+    def test_plugin_validator_optional(self):
         (self.root / "plugins/notion-career-ops/scripts/validate.py").unlink()
+        self.assertEqual(validator.validate(self.root), [])
+
+    def test_plugin_validator_failure(self):
+        script = self.root / "plugins/notion-career-ops/scripts/validate.py"
+        script.write_text(
+            "import sys\nprint('custom rule broken')\nsys.exit(1)\n",
+            encoding="utf-8",
+        )
         self.assertTrue(
             any(
-                "missing package validator" in error
+                "plugin-specific validation failed" in error
+                and "custom rule broken" in error
                 for error in validator.validate(self.root)
             )
         )
@@ -171,7 +180,7 @@ class CatalogTests(unittest.TestCase):
         path.write_text(json.dumps(manifest), encoding="utf-8")
         self.assertTrue(
             any(
-                "plugin manifests disagree on version" in error
+                "notion-career-ops: Plugin manifests disagree on version" in error
                 for error in validator.validate(self.root)
             )
         )
@@ -209,7 +218,7 @@ class CatalogTests(unittest.TestCase):
             )
         )
 
-    def test_package_validation_failure(self):
+    def test_shared_package_failure(self):
         path = (
             self.root
             / "plugins/notion-career-ops/skills/notion-career-ops/agents/openai.yaml"
@@ -217,7 +226,7 @@ class CatalogTests(unittest.TestCase):
         path.unlink()
         self.assertTrue(
             any(
-                "package validation failed" in error
+                error.startswith("notion-career-ops: skills/notion-career-ops/")
                 for error in validator.validate(self.root)
             )
         )

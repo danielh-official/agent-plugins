@@ -149,12 +149,9 @@ class CatalogTests(unittest.TestCase):
                 )
                 del catalog["plugins"][0][field]
 
-    def test_plugin_validator_optional(self):
-        (self.root / "plugins/notion-career-ops/scripts/validate.py").unlink()
-        self.assertEqual(validator.validate(self.root), [])
-
     def test_plugin_validator_failure(self):
         script = self.root / "plugins/notion-career-ops/scripts/validate.py"
+        script.parent.mkdir(exist_ok=True)
         script.write_text(
             "import sys\nprint('custom rule broken')\nsys.exit(1)\n",
             encoding="utf-8",

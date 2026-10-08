@@ -58,17 +58,14 @@ unchanged by the packaging update. Both clients use the same skill and scripts.
 Bump the version in both plugin manifests when releasing changes. Run:
 
 ```sh
-python3 scripts/validate.py
-python3 -m unittest discover -s scripts -p 'test_*.py' -v
 claude plugin validate .
 claude plugin validate .claude-plugin/plugin.json
 ```
 
 GitHub Actions runs the Python packaging checks and regression tests on every push and pull request.
 The workflow lives at the master root and also checks both catalogs and packages.
-This package's `scripts/validate.py` checks only its own rule (exactly one
-skill); the root validator checks the shared metadata conventions, not the
-entire YAML schema. Refresh the marketplace and installed plugin explicitly as needed;
+The root `scripts/validate.py` checks this package's metadata conventions, not
+the entire YAML schema. Refresh the marketplace and installed plugin explicitly as needed;
 catalog sync does not necessarily update an installed cached package.
 
 ## Filters

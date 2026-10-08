@@ -92,10 +92,7 @@ Validate from the repo root:
 ```sh
 python3 scripts/validate.py
 python3 -m unittest discover -s tests -v
-python3 -m unittest discover -s plugins/notion-career-ops/scripts -p 'test_*.py' -v
-python3 -m unittest discover -s plugins/netnewswire-digest/scripts -p 'test_*.py' -v
 python3 -m unittest discover -s plugins/calslashd/scripts -p 'test_*.py' -v
-python3 -m unittest discover -s plugins/linear-topic-grouper/scripts -p 'test_*.py' -v
 python3 plugins/calslashd/skills/calslashd/scripts/selfcheck.py
 claude plugin validate .
 ```

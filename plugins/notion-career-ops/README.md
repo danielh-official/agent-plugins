@@ -10,8 +10,6 @@ Claude and Codex/ChatGPT.
 plugin.json
 skills/notion-career-ops/SKILL.md
 skills/notion-career-ops/agents/openai.yaml
-scripts/validate.py
-scripts/test_validate.py
 ```
 
 This package lives inside the `agent-plugins` master repository, which
@@ -35,10 +33,9 @@ not bundle a Notion connection or store workspace identifiers.
 
 1. Edit the canonical skill only with explicit approval of wording changes.
 2. Bump `version` in both plugin manifests.
-3. Run `python3 scripts/validate.py` (this plugin's own rule: exactly one skill),
-   `python3 -m unittest discover -s scripts -p 'test_*.py' -v`, and `claude plugin validate .`.
+3. Run `claude plugin validate .`.
 4. From the master root, run every step of `.github/workflows/validate.yml`;
-   the root `scripts/validate.py` checks the shared packaging rules.
+   the root `scripts/validate.py` checks this package.
 
 GitHub Actions runs the Python validator and regression tests on every push and pull request.
 The lightweight validator checks our packaging conventions; it is not a full

@@ -12,8 +12,6 @@ Codex/ChatGPT.
 plugin.json
 skills/linear-topic-grouper/SKILL.md
 skills/linear-topic-grouper/agents/openai.yaml
-scripts/validate.py
-scripts/test_validate.py
 ```
 
 This package lives inside the `agent-plugins` master repository, which
@@ -32,10 +30,9 @@ See the [master README](../../README.md) for installation and full validation.
 
 1. Edit the canonical skill only with explicit approval of wording changes.
 2. Bump `version` in both plugin manifests.
-3. Run `python3 scripts/validate.py` (this plugin's own rule: exactly one skill),
-   `python3 -m unittest discover -s scripts -p 'test_*.py' -v`, and `claude plugin validate .`.
+3. Run `claude plugin validate .`.
 4. From the master root, run every step of `.github/workflows/validate.yml`;
-   the root `scripts/validate.py` checks the shared packaging rules.
+   the root `scripts/validate.py` checks this package.
 
 ## Local use
 

@@ -35,6 +35,11 @@
       "name": "linear",
       "source": "./plugins/linear",
       "category": "productivity"
+    },
+    {
+      "name": "ao3",
+      "source": "./plugins/ao3",
+      "category": "entertainment"
     }
   ]
 }

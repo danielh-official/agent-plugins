@@ -1,0 +1,27 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "ao3",
+  "version": "0.0.1",
+  "description": "Turn chosen chapters of an AO3 story, fetched from a work URL or pasted in, into an EPUB for Apple Books.",
+  "author": {
+    "name": "Daniel Haven",
+    "url": "https://github.com/danielh-official"
+  },
+  "homepage": "https://github.com/danielh-official/agent-plugins/tree/main/plugins/ao3",
+  "repository": "https://github.com/danielh-official/agent-plugins",
+  "license": "MIT",
+  "keywords": ["ao3", "archive-of-our-own", "fanfiction", "epub", "ebook", "apple-books"],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "AO3",
+        "shortDescription": "Make Apple Books EPUBs from chosen AO3 chapters.",
+        "category": "Entertainment",
+        "defaultPrompt": [
+          "Make an ebook of the latest two chapters of this AO3 story.",
+          "Turn this pasted chapter into an EPUB for Apple Books."
+        ]
+      }
+    }
+  }
+}

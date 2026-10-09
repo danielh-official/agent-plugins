@@ -1,0 +1,15 @@
+{
+  "name": "linear",
+  "displayName": "Linear",
+  "version": "0.0.2",
+  "description": "Cluster Linear issues into topic groups, flag duplicates and overlaps, and optionally write the groups back as labels or parent issues.",
+  "author": {
+    "name": "Daniel Haven",
+    "url": "https://github.com/danielh-official"
+  },
+  "homepage": "https://github.com/danielh-official/agent-plugins/tree/main/plugins/linear",
+  "repository": "https://github.com/danielh-official/agent-plugins",
+  "license": "MIT",
+  "skills": "./skills/",
+  "keywords": ["linear", "issues", "backlog", "triage", "duplicates", "labels"]
+}

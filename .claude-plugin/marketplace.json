@@ -8,13 +8,13 @@
   },
   "plugins": [
     {
-      "name": "notion-career-ops",
-      "source": "./plugins/notion-career-ops",
+      "name": "career-ops",
+      "source": "./plugins/career-ops",
       "category": "productivity"
     },
     {
-      "name": "netnewswire-digest",
-      "source": "./plugins/netnewswire-digest",
+      "name": "netnewswire",
+      "source": "./plugins/netnewswire",
       "category": "productivity"
     },
     {
@@ -32,8 +32,8 @@
       "category": "health"
     },
     {
-      "name": "linear-topic-grouper",
-      "source": "./plugins/linear-topic-grouper",
+      "name": "linear",
+      "source": "./plugins/linear",
       "category": "productivity"
     },
     {

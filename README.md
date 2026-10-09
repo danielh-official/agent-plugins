@@ -5,12 +5,17 @@ Marketplace name: **danielh-official-plugins**.
 
 | Plugin | What it does | Runs on |
 | --- | --- | --- |
-| [notion-career-ops](plugins/notion-career-ops/README.md) | Career Ops job-search tracker in Notion | Claude, Codex, ChatGPT, Antigravity CLI (needs Notion connected) |
-| [netnewswire-digest](plugins/netnewswire-digest/README.md) | Ranked, summarized digest of NetNewsWire articles | Claude Code, local Codex, Antigravity CLI on macOS (needs a shell) |
+| [career-ops](plugins/career-ops/README.md) | Career Ops job-search tracker in Notion | Claude, Codex, ChatGPT, Antigravity CLI (needs Notion connected) |
+| [netnewswire](plugins/netnewswire/README.md) | Ranked, summarized digest of NetNewsWire articles | Claude Code, local Codex, Antigravity CLI on macOS (needs a shell) |
 | [calslashd](plugins/calslashd/README.md) | Calorie-budget stats from Apple Health using the CalSlashD app's formulas | Claude, Codex, ChatGPT, Antigravity CLI on iOS (needs Apple Health access) |
-| [linear-topic-grouper](plugins/linear-topic-grouper/README.md) | Groups Linear issues by topic, flags duplicates, optionally writes labels or parent issues back | Claude, Codex, ChatGPT, Antigravity CLI (needs Linear connected) |
+| [linear](plugins/linear/README.md) | Groups Linear issues by topic, flags duplicates, optionally writes labels or parent issues back | Claude, Codex, ChatGPT, Antigravity CLI (needs Linear connected) |
 | [ao3](plugins/ao3/README.md) | EPUBs for Apple Books from chosen AO3 chapters, fetched or pasted | Fetch: Claude Code, Codex, Antigravity CLI on a Mac. Paste: also the Claude and ChatGPT iPhone apps |
 | [quiz-api](https://github.com/danielh-official/quiz-api/tree/main/plugins/quiz-api) | Study and write spaced-repetition quizzes via the Quiz API MCP server | Claude Code, Codex, Antigravity CLI (needs your own fork of quiz-api, deployed, with `QUIZ_API_URL` set) |
+
+A plugin is named after the app it is built for (`linear:topic-grouper`), or after its job when the app
+is only where its data lives (`career-ops:insights`, which stores data in Notion). Skills are named after what they do.
+If you installed `notion-career-ops`, `netnewswire-digest` or `linear-topic-grouper` under their old
+names, uninstall them and install `career-ops`, `netnewswire` or `linear` instead.
 
 ## Install
 
@@ -18,11 +23,11 @@ Marketplace name: **danielh-official-plugins**.
 
 ```sh
 claude plugin marketplace add danielh-official/agent-plugins
-claude plugin install notion-career-ops@danielh-official-plugins
-claude plugin install netnewswire-digest@danielh-official-plugins
+claude plugin install career-ops@danielh-official-plugins
+claude plugin install netnewswire@danielh-official-plugins
 claude plugin install quiz-api@danielh-official-plugins
 claude plugin install calslashd@danielh-official-plugins
-claude plugin install linear-topic-grouper@danielh-official-plugins
+claude plugin install linear@danielh-official-plugins
 claude plugin install ao3@danielh-official-plugins
 ```
 
@@ -38,11 +43,11 @@ then `/plugin install <name>@danielh-official-plugins`.
 
 ```sh
 codex plugin marketplace add danielh-official/agent-plugins
-codex plugin add notion-career-ops@danielh-official-plugins
-codex plugin add netnewswire-digest@danielh-official-plugins
+codex plugin add career-ops@danielh-official-plugins
+codex plugin add netnewswire@danielh-official-plugins
 codex plugin add quiz-api@danielh-official-plugins
 codex plugin add calslashd@danielh-official-plugins
-codex plugin add linear-topic-grouper@danielh-official-plugins
+codex plugin add linear@danielh-official-plugins
 codex plugin add ao3@danielh-official-plugins
 ```
 
@@ -53,10 +58,10 @@ add this one yet. Clone and install each plugin directory by path:
 
 ```sh
 git clone https://github.com/danielh-official/agent-plugins.git
-agy plugin install ./agent-plugins/plugins/notion-career-ops
-agy plugin install ./agent-plugins/plugins/netnewswire-digest
+agy plugin install ./agent-plugins/plugins/career-ops
+agy plugin install ./agent-plugins/plugins/netnewswire
 agy plugin install ./agent-plugins/plugins/calslashd
-agy plugin install ./agent-plugins/plugins/linear-topic-grouper
+agy plugin install ./agent-plugins/plugins/linear
 agy plugin install ./agent-plugins/plugins/ao3
 ```
 
@@ -97,7 +102,7 @@ Validate from the repo root:
 python3 scripts/validate.py
 python3 -m unittest discover -s tests -v
 python3 -m unittest discover -s plugins/calslashd/scripts -p 'test_*.py' -v
-python3 plugins/calslashd/skills/calslashd/scripts/selfcheck.py
+python3 plugins/calslashd/skills/insights/scripts/selfcheck.py
 python3 plugins/ao3/skills/ebook/scripts/selfcheck.py
 claude plugin validate .
 ```

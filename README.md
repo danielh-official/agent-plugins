@@ -112,7 +112,7 @@ rules specific to that plugin; the root runs it when present.
 plugins/<name>/
   .claude-plugin/plugin.json
   plugin.json                       Codex/OpenAI + Antigravity manifest
-  skills/<name>/
+  skills/<skill>/
   scripts/
   README.md
 scripts/validate.py

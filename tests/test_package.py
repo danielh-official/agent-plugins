@@ -128,8 +128,17 @@ class PackageTests(unittest.TestCase):
         )
         skill_file.unlink()
         self.assertTrue(
-            any("skills/<plugin name>" in error for error in validate(self.root))
+            any("skills/<skill name>" in error for error in validate(self.root))
         )
+
+    def test_skill_name_independent_of_plugin_name(self):
+        renamed = self.root / "skills/other-name"
+        self.skill.rename(renamed)
+        (renamed / "SKILL.md").write_text(
+            "---\nname: other-name\ndescription: An example skill.\n---\n",
+            encoding="utf-8",
+        )
+        self.assertEqual(validate(self.root), [])
 
     def test_extra_skill_allowed(self):
         extra = self.root / "skills/extra/agents"

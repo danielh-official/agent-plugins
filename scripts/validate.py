@@ -162,8 +162,8 @@ def validate_package(root):
                 "Codex defaultPrompt entries must be nonempty strings of at most 128 characters"
             )
     skills = sorted((root / "skills").glob("*/SKILL.md"))
-    if not any(skill.parent.name == name for skill in skills):
-        errors.append("Expected a skills/<plugin name>/SKILL.md")
+    if not skills:
+        errors.append("Expected at least one skills/<skill name>/SKILL.md")
     for skill in skills:
         try:
             text = skill.read_text(encoding="utf-8")

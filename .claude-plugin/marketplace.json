@@ -35,6 +35,11 @@
       "name": "linear-topic-grouper",
       "source": "./plugins/linear-topic-grouper",
       "category": "productivity"
+    },
+    {
+      "name": "ao3",
+      "source": "./plugins/ao3",
+      "category": "productivity"
     }
   ]
 }

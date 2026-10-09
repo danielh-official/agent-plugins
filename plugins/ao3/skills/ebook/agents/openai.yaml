@@ -1,0 +1,4 @@
+interface:
+  display_name: "AO3 Ebook"
+  short_description: "Make Apple Books EPUBs from chosen AO3 chapters."
+  default_prompt: "Use $ebook to make an EPUB of the chapters I pick from this AO3 story."

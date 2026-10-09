@@ -8,8 +8,8 @@
   },
   "plugins": [
     {
-      "name": "notion",
-      "source": "./plugins/notion",
+      "name": "career-ops",
+      "source": "./plugins/career-ops",
       "category": "productivity"
     },
     {

@@ -1,9 +1,15 @@
 ---
-name: career-ops
+name: insights
 description: "This skill should be used when the user asks to \"track a job application\", \"show my active jobs\", \"what's due\", \"where am I with this role\", \"is this job a fit\", or mentions a job, interview, recruiter, follow-up, or referral that belongs in the Notion Career Ops tracker."
 ---
 
-# Notion career-ops
+# Career Ops insights
+
+## Data source
+
+Use the Career Ops data source saved in memory. If none is saved, use Notion.
+Notion is the only supported source; if memory names any other, say it is not
+supported yet and stop.
 
 ## Connection preflight
 

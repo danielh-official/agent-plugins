@@ -150,7 +150,7 @@ class CatalogTests(unittest.TestCase):
                 del catalog["plugins"][0][field]
 
     def test_plugin_validator_failure(self):
-        script = self.root / "plugins/notion/scripts/validate.py"
+        script = self.root / "plugins/career-ops/scripts/validate.py"
         script.parent.mkdir(exist_ok=True)
         script.write_text(
             "import sys\nprint('custom rule broken')\nsys.exit(1)\n",
@@ -171,19 +171,19 @@ class CatalogTests(unittest.TestCase):
         )
 
     def test_bundled_version_drift(self):
-        path = self.root / "plugins/notion/.claude-plugin/plugin.json"
+        path = self.root / "plugins/career-ops/.claude-plugin/plugin.json"
         manifest = validator.load(path)
         manifest["version"] = "2.0.0"
         path.write_text(json.dumps(manifest), encoding="utf-8")
         self.assertTrue(
             any(
-                "notion: Plugin manifests disagree on version" in error
+                "career-ops: Plugin manifests disagree on version" in error
                 for error in validator.validate(self.root)
             )
         )
 
     def test_missing_bundled_package(self):
-        path = self.root / "plugins/notion/plugin.json"
+        path = self.root / "plugins/career-ops/plugin.json"
         path.unlink()
         self.assertTrue(validator.validate(self.root))
 
@@ -207,7 +207,7 @@ class CatalogTests(unittest.TestCase):
             )
 
     def test_missing_plugin_directory(self):
-        shutil.rmtree(self.root / "plugins/notion")
+        shutil.rmtree(self.root / "plugins/career-ops")
         self.assertTrue(
             any(
                 "missing bundled plugin directory" in error
@@ -216,17 +216,17 @@ class CatalogTests(unittest.TestCase):
         )
 
     def test_shared_package_failure(self):
-        path = self.root / "plugins/notion/skills/career-ops/agents/openai.yaml"
+        path = self.root / "plugins/career-ops/skills/insights/agents/openai.yaml"
         path.unlink()
         self.assertTrue(
             any(
-                error.startswith("notion: skills/career-ops/")
+                error.startswith("career-ops: skills/insights/")
                 for error in validator.validate(self.root)
             )
         )
 
     def test_package_symlink(self):
-        root = self.root / "plugins/notion"
+        root = self.root / "plugins/career-ops"
         (root / "linked").symlink_to(root / "README.md")
         self.assertTrue(
             any(

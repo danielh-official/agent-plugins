@@ -5,10 +5,10 @@
   },
   "plugins": [
     {
-      "name": "notion",
+      "name": "career-ops",
       "source": {
         "source": "local",
-        "path": "./plugins/notion"
+        "path": "./plugins/career-ops"
       },
       "policy": {
         "installation": "AVAILABLE",

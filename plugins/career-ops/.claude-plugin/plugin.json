@@ -1,13 +1,13 @@
 {
-  "name": "notion",
-  "displayName": "Notion",
+  "name": "career-ops",
+  "displayName": "Career Ops",
   "version": "0.0.2",
   "description": "Job-search tracker workflow for the Career Ops page in Notion (Jobs, Events, Contacts, Profile).",
   "author": {
     "name": "Daniel Haven",
     "url": "https://github.com/danielh-official"
   },
-  "homepage": "https://github.com/danielh-official/agent-plugins/tree/main/plugins/notion",
+  "homepage": "https://github.com/danielh-official/agent-plugins/tree/main/plugins/career-ops",
   "repository": "https://github.com/danielh-official/agent-plugins",
   "license": "MIT",
   "skills": "./skills/",

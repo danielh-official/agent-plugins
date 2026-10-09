@@ -1,0 +1,4 @@
+interface:
+  display_name: "Career Ops Data Source"
+  short_description: "Choose and check where your job-search data lives."
+  default_prompt: "Use $set-source to check that my Career Ops data source is set up."

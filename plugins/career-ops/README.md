@@ -1,15 +1,19 @@
-# notion
+# career-ops
 
-One canonical skill for the Career Ops job-search tracker in Notion, packaged for
-Claude and Codex/ChatGPT.
+Two skills for the Career Ops job-search tracker, packaged for Claude and
+Codex/ChatGPT. `insights` reads and updates the tracker. `set-source` chooses
+where the tracker's data lives and checks it is reachable; Notion is the only
+supported source for now.
 
 ## Layout
 
 ```text
 .claude-plugin/plugin.json
 plugin.json
-skills/career-ops/SKILL.md
-skills/career-ops/agents/openai.yaml
+skills/insights/SKILL.md
+skills/insights/agents/openai.yaml
+skills/set-source/SKILL.md
+skills/set-source/agents/openai.yaml
 ```
 
 This package lives inside the `agent-plugins` master repository, which
@@ -20,7 +24,7 @@ See the [master README](../../README.md) for installation and full validation.
 
 - **The host agent must have the Notion MCP server (or an equivalent Notion
   app connection) installed and authenticated.** This plugin cannot work
-  without it: it ships only a skill, no Notion tools. This applies to every
+  without it: it ships only skills, no Notion tools. This applies to every
   client (Claude Code, Codex, Antigravity CLI), so connect Notion in each one
   separately.
 - Access to a **Career Ops** page containing **Profile**, **Jobs**, **Events**,
@@ -54,10 +58,10 @@ copy while the standalone skill or an older plugin copy is enabled.
 
 ```sh
 claude plugin marketplace add danielh-official/agent-plugins
-claude plugin install notion@danielh-official-plugins
+claude plugin install career-ops@danielh-official-plugins
 
 codex plugin marketplace add danielh-official/agent-plugins
-codex plugin add notion@danielh-official-plugins
+codex plugin add career-ops@danielh-official-plugins
 ```
 
 Git credentials must grant access to the master repository.

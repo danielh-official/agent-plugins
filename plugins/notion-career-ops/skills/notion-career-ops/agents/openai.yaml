@@ -1,4 +1,0 @@
-interface:
-  display_name: "Notion Career Ops"
-  short_description: "Read and update your Notion job-search tracker."
-  default_prompt: "Use $notion-career-ops to show my active jobs in Notion, grouped by derived status."

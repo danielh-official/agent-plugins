@@ -1,0 +1,26 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "linear",
+  "version": "0.0.2",
+  "description": "Cluster Linear issues into topic groups, flag duplicates and overlaps, and optionally write the groups back as labels or parent issues.",
+  "author": {
+    "name": "Daniel Haven",
+    "url": "https://github.com/danielh-official"
+  },
+  "homepage": "https://github.com/danielh-official/agent-plugins/tree/main/plugins/linear",
+  "repository": "https://github.com/danielh-official/agent-plugins",
+  "license": "MIT",
+  "keywords": ["linear", "issues", "backlog", "triage", "duplicates", "labels"],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Linear",
+        "shortDescription": "Group Linear issues by topic and flag duplicates.",
+        "category": "Productivity",
+        "defaultPrompt": [
+          "Group my open Linear issues by topic and flag any duplicates."
+        ]
+      }
+    }
+  }
+}

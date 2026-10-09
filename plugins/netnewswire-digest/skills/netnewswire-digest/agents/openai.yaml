@@ -1,4 +1,0 @@
-interface:
-  display_name: "NetNewsWire Digest"
-  short_description: "Summarize local NetNewsWire articles on macOS."
-  default_prompt: "Use $netnewswire-digest to summarize my unread NetNewsWire articles."

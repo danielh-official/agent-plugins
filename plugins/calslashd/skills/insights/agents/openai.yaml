@@ -1,0 +1,4 @@
+interface:
+  display_name: "CalSlashD"
+  short_description: "Calorie budget insights from Apple Health."
+  default_prompt: "Use $insights to check how my calorie budget is doing."

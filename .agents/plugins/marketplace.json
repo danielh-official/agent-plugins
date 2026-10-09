@@ -5,10 +5,10 @@
   },
   "plugins": [
     {
-      "name": "notion-career-ops",
+      "name": "notion",
       "source": {
         "source": "local",
-        "path": "./plugins/notion-career-ops"
+        "path": "./plugins/notion"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -17,10 +17,10 @@
       "category": "Productivity"
     },
     {
-      "name": "netnewswire-digest",
+      "name": "netnewswire",
       "source": {
         "source": "local",
-        "path": "./plugins/netnewswire-digest"
+        "path": "./plugins/netnewswire"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -54,10 +54,10 @@
       "category": "Health"
     },
     {
-      "name": "linear-topic-grouper",
+      "name": "linear",
       "source": {
         "source": "local",
-        "path": "./plugins/linear-topic-grouper"
+        "path": "./plugins/linear"
       },
       "policy": {
         "installation": "AVAILABLE",

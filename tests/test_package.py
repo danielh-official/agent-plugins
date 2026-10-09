@@ -128,7 +128,7 @@ class PackageTests(unittest.TestCase):
         )
         skill_file.unlink()
         self.assertTrue(
-            any("skills/<plugin name>" in error for error in validate(self.root))
+            any("at least one skills/" in error for error in validate(self.root))
         )
 
     def test_extra_skill_allowed(self):

@@ -16,7 +16,7 @@
       "interface": {
         "displayName": "AO3",
         "shortDescription": "Make Apple Books EPUBs from chosen AO3 chapters.",
-        "category": "Productivity",
+        "category": "Entertainment",
         "defaultPrompt": [
           "Make an ebook of the latest two chapters of this AO3 story.",
           "Turn this pasted chapter into an EPUB for Apple Books."

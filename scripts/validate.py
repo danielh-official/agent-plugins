@@ -163,7 +163,7 @@ def validate_package(root):
             )
     skills = sorted((root / "skills").glob("*/SKILL.md"))
     if not skills:
-        errors.append("Expected at least one skills/<skill>/SKILL.md")
+        errors.append("Expected at least one skills/<skill name>/SKILL.md")
     for skill in skills:
         try:
             text = skill.read_text(encoding="utf-8")

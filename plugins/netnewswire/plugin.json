@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "netnewswire",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Pull articles from NetNewsWire by filter (unread, starred, folder, feed, recency), then rank them by relevance to you and summarize.",
   "author": {
     "name": "Daniel Haven",

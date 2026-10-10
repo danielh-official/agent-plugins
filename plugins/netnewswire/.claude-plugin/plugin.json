@@ -1,7 +1,7 @@
 {
   "name": "netnewswire",
   "displayName": "NetNewsWire",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Pull articles from NetNewsWire by filter (unread, starred, folder, feed, recency), then rank them by relevance to you and summarize.",
   "author": {
     "name": "Daniel Haven",
